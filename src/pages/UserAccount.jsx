@@ -9,10 +9,8 @@ const User = () => {
   return (
     <div>
       <Navbar />
-
       <HeaderAccount />
       <Account />
-
       <Footer />
     </div>
   );

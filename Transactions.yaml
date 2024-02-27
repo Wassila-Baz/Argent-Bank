@@ -1,0 +1,68 @@
+/transactions:
+  get:
+    summary: Récupère les transactions pour le mois en cours de chaque utilisateur
+    responses:
+      "200":
+        description: Succès. Renvoie la liste des transactions du mois en cours.
+      "404":
+        description: Aucune transaction trouvée pour le mois en cours.
+  post:
+    summary: Ajoute une nouvelle transaction
+    requestBody:
+      description: Objet JSON représentant les détails de la transaction à ajouter
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: Date de la transaction
+              description:
+                type: string
+                description: Description de la transaction
+              Amount:
+                type: number
+                description: Montant de la transaction
+              Balance:
+                type: number
+                description: Solde après la transaction
+
+  put:
+    summary: Modifie une transaction existante
+    parameters:
+      - name: transactionId
+        in: path
+        description: Identifiant unique de la transaction à modifier
+        required: true
+        schema:
+          type: string
+    requestBody:
+      description: Objet JSON représentant les nouveaux détails de la transaction
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+
+    responses:
+      "200":
+        description: Succès. La transaction a été modifiée avec succès.
+      "404":
+        description: Aucune transaction trouvée avec l'identifiant spécifié.
+  delete:
+    summary: Supprime une transaction existante
+    parameters:
+      - name: transactionId
+        in: path
+        description: Identifiant unique de la transaction à supprimer
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Succès. La transaction a été supprimée avec succès.
+      "404":
+        description: Aucune transaction trouvée avec l'identifiant spécifié.

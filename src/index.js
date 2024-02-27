@@ -1,36 +1,41 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import UserAccount from './pages/UserAccount';
+import Error404 from "./components/error404/error404";
+import PrivateRoute from "./components/PrivateRoute";
 
-// Configurez votre store Redux ici
+//  store Redux
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit"; 
-import rootReducer from "./reducers"
+import rootReducer from "./reducers";
 
 const store = configureStore({
   reducer: rootReducer,
-  devTools:true,
+  devTools: true,
 });
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/sign-in' element={<Login />} />
-        <Route path='/account' element={<UserAccount />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/sign-in' element={<Login />} />
+          <Route element={<PrivateRoute />}>
+           <Route path='/account' element={<UserAccount />} />
+          </Route >
+          <Route path="*" element={< Error404/>}/>
+        </Routes>
+      </Router>
+    </Provider>
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}> 
-      <App />
-    </Provider>
+    <App />
   </React.StrictMode>
 );
