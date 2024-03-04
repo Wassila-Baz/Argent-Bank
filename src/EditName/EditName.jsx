@@ -16,7 +16,7 @@ const EditName = () => {
     setNewUserName(e.target.value); // Mise à jour de l'état local avec la valeur saisie dans l'input
   };
 
-  // Gestion de l'enregistrement du nouveau nom d'utilisateur
+  // Gestion de l'enregistrdement du nouveau nom d'utilisateur
   const handleSave = () => {
     dispatch(updateUserName(newUserName)); // Dispatch de l'action updateUserName avec le nouveau nom d'utilisateur
   };
