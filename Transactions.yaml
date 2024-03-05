@@ -1,12 +1,65 @@
 /transactions:
-  get:
-    summary: Récupère les transactions pour le mois en cours de chaque utilisateur
+  GET:
+    summary: Récupère toutes les transactions pour le mois en cours, groupées par compte
     responses:
-      "200":
-        description: Succès. Renvoie la liste des transactions du mois en cours.
-      "404":
-        description: Aucune transaction trouvée pour le mois en cours.
-  post:
+      '200':
+        description: Renvoie les transactions du mois en cours groupées par compte
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  account:
+                    type: string
+                    description: Nom du compte
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
+/transactions:
+  GET:
+    summary: de visualiser les détails d'une transaction dans une autre vue ;
+    responses:
+      '200':
+       détails d'une transaction dans une autre vue ;
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  account:
+                    type: string
+                    description: Nom du compte
+                  total:
+                    type: number
+                    description: Total des transactions du mois en cours dans ce compte
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                          description: Date
+                        description:
+                          type: string
+                          description: Description
+                        amount:
+                          type: number
+                          description: Amount
+                        balance:
+                          type: number
+                          description: Balance
+        '500':
+              description: Une erreur est survenue lors de la récupération des transactions. Veuillez réessayer plus tard.
+
+/transactions:
+  POST:
     summary: Ajoute une nouvelle transaction
     requestBody:
       description: Objet JSON représentant les détails de la transaction à ajouter
@@ -14,23 +67,15 @@
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              date:
-                type: string
-                format: date
-                description: Date de la transaction
-              description:
-                type: string
-                description: Description de la transaction
-              Amount:
-                type: number
-                description: Montant de la transaction
-              Balance:
-                type: number
-                description: Solde après la transaction
+            $ref: '#/components/schemas/TransactionInput'
+    responses:
+      '200':
+        description: La transaction a été ajoutée avec succès
+      '400':
+        description: Les données fournies sont invalides
 
-  put:
+/transactions/{transactionId}:
+  PUT:
     summary: Modifie une transaction existante
     parameters:
       - name: transactionId
@@ -45,14 +90,16 @@
       content:
         application/json:
           schema:
-            type: object
-
+            $ref: '#/components/schemas/TransactionInput'
     responses:
-      "200":
-        description: Succès. La transaction a été modifiée avec succès.
-      "404":
-        description: Aucune transaction trouvée avec l'identifiant spécifié.
-  delete:
+      '200':
+        description: La transaction a été modifiée avec succès
+      '404':
+        description: Aucune transaction trouvée avec l'identifiant spécifié
+      '400':
+        description: Les données fournies sont invalides
+
+  DELETE:
     summary: Supprime une transaction existante
     parameters:
       - name: transactionId
@@ -62,7 +109,7 @@
         schema:
           type: string
     responses:
-      "200":
-        description: Succès. La transaction a été supprimée avec succès.
-      "404":
-        description: Aucune transaction trouvée avec l'identifiant spécifié.
+      '200':
+        description: La transaction a été supprimée avec succès
+      '404':
+        description: Aucune transaction trouvée avec l'identifiant spécifié
