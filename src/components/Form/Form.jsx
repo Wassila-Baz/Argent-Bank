@@ -5,14 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import './Form.css';
 
 const SignIn = () => {
+  //Etats locaux
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(true); // Mise à true par défaut, affiche la baniere si
-  const dispatch = useDispatch();
-  const loading = useSelector(state => state.user.loading);
-  const error = useSelector(state => state.user.error);
-  const navigate = useNavigate();
+  
+  //Rédux
+  const dispatch = useDispatch(); // Obtention de la fonction pour envoyer des actions à Redux
+  const loading = useSelector(state => state.user.loading); // Obtention du chargement de l'état global à partir du store Redux
+  const error = useSelector(state => state.user.error); // Obtention de l'erreur de l'état global à partir du store Redux
+  
+  //Navigation
+  const navigate = useNavigate(); // Obtention de la fonction pour la navigation entre les pages
 
+  //Gestion de la connexion
   const handleSignIn = async () => {
     try {
       if (!email || !password) {
@@ -20,7 +26,7 @@ const SignIn = () => {
         return;
       }
 
-      await dispatch(loginUser(email, password, navigate));
+      await dispatch(loginUser(email, password, navigate));//hooks envoie les informations à Redux
     } catch (error) {
       console.error('API Error:', error);
       setShowError(true);
