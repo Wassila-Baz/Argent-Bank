@@ -10,7 +10,7 @@ const HeaderAccount = () => {
   const userProfile = useSelector((state) => state.user.userProfile); // Utilise le hook useSelector pour accéder au profil de l'utilisateur dans le store Redux
   const [isEditing, setIsEditing] = useState(false); // Utilise le hook useState pour gérer l'état de l'édition du nom
 
-  useEffect(() => {
+  useEffect(() => { //montage du composant 
     dispatch(fetchUserProfile()); // Déclenche l'action fetchUserProfile pour récupérer le profil de l'utilisateur lors du montage du composant
   }, [dispatch]); // Le useEffect dépend de la fonction dispatch
 

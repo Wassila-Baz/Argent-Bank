@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import UserAccount from './pages/UserAccount';
-import Error404 from "./components/error404/error404";
+import Error404 from "./components/Error404/Error404.jsx";
 import PrivateRoute from "./components/PrivateRoute";
 
 //  store Redux
@@ -25,15 +25,16 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/sign-in' element={<Login />} />
           <Route element={<PrivateRoute />}>
-           <Route path='/account' element={<UserAccount />} />
-          </Route >
-          <Route path="*" element={< Error404/>}/>
+            <Route path='/account' element={<UserAccount />} />
+          </Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>
     </Provider>
   );
 };
 
+// Utilisez createRoot() pour rendre l'application
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />

@@ -1,5 +1,5 @@
 import React from "react";
-import "./error404.css";
+import "../Error404/Error404.css";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom"; 
