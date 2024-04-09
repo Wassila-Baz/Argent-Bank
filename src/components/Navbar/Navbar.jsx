@@ -5,17 +5,18 @@ import "../Navbar/Navbar.css";
 import logo from "../../assets/argentBankLogo.webp";
 import { logoutUser } from '../../action/user.action'; // Une action Redux pour gérer la déconnexion de l'utilisateur.
 
+// Définition du composant Navbar
 const Navbar = () => {
-  const userProfile = useSelector(state => state.user.userProfile); // Utilise useSelector pour accéder à userProfile
-  const dispatch = useDispatch(); // 
+  const userProfile = useSelector(state => state.user.userProfile); //  le hook useSelector pour accéder au profil de l'utilisateur dans le store Redux
+  const dispatch = useDispatch(); // Obtient la fonction dispatch pour envoyer des actions Redux
 
-const handleLogout = () => {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
-    dispatch(logoutUser()); // Déclenche l'action logoutUser
-    console.log("Déconnexion effectuée"); 
-};
-//condition pour afficher le logout uniquement si l'utilisateur est connecte"r 
+  // Fonction pour gérer la déconnexion de l'utilisateur
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Supprime le token de l'utilisateur du stockage local
+    sessionStorage.removeItem("token"); // Supprime le token de l'utilisateur de la session
+    dispatch(logoutUser()); // Déclenche l'action logoutUser pour déconnecter l'utilisateur
+    console.log("Déconnexion effectuée"); // Affiche un message dans la console pour indiquer que la déconnexion a été effectuée
+  };
 
 return (
   <nav className="main-nav">
