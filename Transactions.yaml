@@ -85,7 +85,15 @@
         schema:
           type: string
     requestBody:
-      description: Objet JSON représentant les nouveaux détails de la transaction
+description: |
+        Objet JSON représentant les nouveaux détails de la transaction. Les champs suivants peuvent être modifiés :
+        - date: Date de la transaction au format YYYY-MM-DD.
+        - description: Description de la transaction.
+        - amount: Montant de la transaction.
+        - balance: Solde de la transaction.
+        - transaction_type: Type de la transaction (par exemple, "électronique").
+        - category: Catégorie de la transaction. Utilisez le crayon pour sélectionner une catégorie dans un menu déroulant.
+        - note: Note associée à la transaction. Utilisez le crayon pour ajouter une note via un champ de texte.
       required: true
       content:
         application/json:
@@ -99,17 +107,18 @@
       '400':
         description: Les données fournies sont invalides
 
-  DELETE:
-    summary: Supprime une transaction existante
-    parameters:
-      - name: transactionId
-        in: path
-        description: Identifiant unique de la transaction à supprimer
-        required: true
-        schema:
-          type: string
-    responses:
-      '200':
-        description: La transaction a été supprimée avec succès
-      '404':
-        description: Aucune transaction trouvée avec l'identifiant spécifié
+DELETE:
+  summary: Cette endpoint permet de supprimer des informations spécifiques sur une transaction existante, identifiée par son ID
+  parameters:
+    - name: transactionId
+      in: path
+      description: Identifiant unique de la transaction à supprimer
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Les informations sur la transaction ont été supprimées avec succès
+    '404':
+      description: Aucune transaction trouvée avec l'identifiant spécifié
+

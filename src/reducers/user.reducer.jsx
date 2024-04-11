@@ -2,8 +2,8 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, USER_PROFILE, UPDATE_USER_
 
 const initialState = {
   loading: false,
-  error: null,
-  userProfile: '',
+  error: null, //n'a pas rencontré d'erreur au départ.
+  userProfile: '', // début de l'application, aucun profil utilisateur n'est actuellement chargé ou disponible
 };
 
 const userReducer = (state = initialState, action) => {
