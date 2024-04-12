@@ -23,7 +23,7 @@ const EditName = () => {
 
   // Gestion de l'annulation de la modification du nom d'utilisateur
   const handleCancel = () => {
-
+    setNewUserName("");
   };
 
   return (
@@ -36,7 +36,7 @@ const EditName = () => {
             type="text"
             id="username"
             name="username"
-            defaultValue={userProfile.userName} // Utilisation de userProfile.userName comme valeur par défaut
+            value={newUserName} // Utilisation de newUserName comme valeur
             onChange={handleUserNameChange} // Gestion des modifications du nom d'utilisateur
           />
         </div>
