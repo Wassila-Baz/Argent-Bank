@@ -23,7 +23,7 @@ const EditName = () => {
 
   // Gestion de l'annulation de la modification du nom d'utilisateur
   const handleCancel = () => {
-    // Vous pouvez implémenter une logique pour réinitialiser l'état local du nouveau nom d'utilisateur si nécessaire
+
   };
 
   return (
